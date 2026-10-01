@@ -93,7 +93,6 @@ while :; do
     --gpu-mode=drm \
     -p 27031:27031/udp \
     -p 27036:27036/udp \
-    --passt-socket= "/run/systemd/userdb/*" \
     -p 27036:27036 \
     -p 27037:27037 \
     --interactive \
