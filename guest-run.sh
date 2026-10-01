@@ -25,6 +25,15 @@ if [ -d "$icd" ]; then
   fi
 fi
 
+mkdir -p /run/systemd/userdb
+i=0
+for s in /run/muvm-host/run/systemd/userdb/*; do
+  [ -S "\$s" ] || continue
+  setsid socat "UNIX-LISTEN:/run/systemd/userdb/\$(basename "\$s"),fork,mode=0666" \\
+    "VSOCK-CONNECT:2:\$((50199 - i))" </dev/null >/dev/null 2>&1 &
+  i=\$((i + 1))
+done
+
 steam_root="${STEAM_ARM64_ROOT:-${XDG_DATA_HOME:-$HOME/.local/share}/Steam}"
 
 # muvm keeps one guest per user and a launch into a running guest keeps that

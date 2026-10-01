@@ -35,6 +35,7 @@ buildFHSEnv {
       python3
       usbutils
       xdg-utils
+      socat
       xz
       zenity
 
